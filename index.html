@@ -1,132 +1,106 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtueller Hund</title>
-    <style>
-        body {
-            text-align: center;
-            background-color: #e0f7da;
-            font-family: Arial, sans-serif;
-        }
-        #game-container {
-            position: relative;
-            display: inline-block;
-        }
-        #dog {
-            width: 300px;
-        }
-        #brush, #soap, #food, #ball, #medicine, #bed {
-            width: 50px;
-            position: absolute;
-            cursor: grab;
-            display: none;
-        }
-        #progress {
-            width: 300px;
-            height: 20px;
-            background-color: #ddd;
-            border-radius: 10px;
-            margin: 20px auto;
-            overflow: hidden;
-            display: none;
-        }
-        #progress-bar {
-            width: 0;
-            height: 100%;
-            background-color: #4CAF50;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Interaktiver Hund</title>
+  <style>
+    body {
+      background-color: #F5F5DC; /* Beigefarbener Hintergrund */
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    #hund-container {
+      margin: 20px auto;
+      width: 320px;
+    }
+    #hund {
+      max-width: 100%;
+      border: 5px solid #A0522D; /* Sienna-Farbton, angelehnt an Hundetöne */
+      border-radius: 10px;
+    }
+    #menu {
+      margin: 20px auto;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      background-color: #A0522D;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #8B4513;
+    }
+    /* Fortschrittsbalken */
+    #progressContainer {
+      width: 320px;
+      background-color: #ddd;
+      margin: 20px auto;
+      border-radius: 5px;
+      overflow: hidden;
+      display: none;
+    }
+    #progressBar {
+      width: 0;
+      height: 20px;
+      background-color: #A0522D;
+    }
+  </style>
 </head>
 <body>
-    <h1>Pflege deinen Hund</h1>
-    <div id="game-container">
-        <img id="dog" src="hund.png" alt="Hund">
-        <img id="brush" src="buerste.png" alt="Bürste">
-        <img id="soap" src="seife.png" alt="Seife">
-        <img id="food" src="futter.png" alt="Futter">
-        <img id="ball" src="ball.png" alt="Ball">
-        <img id="medicine" src="medizin.png" alt="Medizin">
-        <img id="bed" src="bett.png" alt="Bett">
-    </div>
-    <button onclick="startBrushing()">Hund bürsten</button>
-    <button onclick="startWashing()">Hund waschen</button>
-    <button onclick="startFeeding()">Hund füttern</button>
-    <button onclick="startPlaying()">Mit Hund spielen</button>
-    <button onclick="startHealing()">Hund heilen</button>
-    <button onclick="startSleeping()">Hund schlafen legen</button>
-    <div id="progress">
-        <div id="progress-bar"></div>
-    </div>
-    
-    <script>
-        let progress = 0;
-        let task = "";
-        const brush = document.getElementById("brush");
-        const soap = document.getElementById("soap");
-        const food = document.getElementById("food");
-        const ball = document.getElementById("ball");
-        const medicine = document.getElementById("medicine");
-        const bed = document.getElementById("bed");
-        const progressBar = document.getElementById("progress-bar");
-        const progressContainer = document.getElementById("progress");
-        
-        function startBrushing() { startTask("brushing", brush); }
-        function startWashing() { startTask("washing", soap); }
-        function startFeeding() { startTask("feeding", food); }
-        function startPlaying() { startTask("playing", ball); }
-        function startHealing() { startTask("healing", medicine); }
-        function startSleeping() { startTask("sleeping", bed); }
-        
-        function startTask(newTask, tool) {
-            resetTools();
-            task = newTask;
-            tool.style.display = "block";
-            progressContainer.style.display = "block";
-        }
 
-        function resetTools() {
-            brush.style.display = "none";
-            soap.style.display = "none";
-            food.style.display = "none";
-            ball.style.display = "none";
-            medicine.style.display = "none";
-            bed.style.display = "none";
-            progress = 0;
-            progressBar.style.width = "0%";
-        }
+  <h1>Interaktiver Hund</h1>
 
-        document.addEventListener("mousemove", function(event) {
-            if (task) {
-                let tool = task === "brushing" ? brush :
-                           task === "washing" ? soap :
-                           task === "feeding" ? food :
-                           task === "playing" ? ball :
-                           task === "healing" ? medicine : bed;
-                tool.style.left = event.pageX - 25 + "px";
-                tool.style.top = event.pageY - 25 + "px";
-                increaseProgress();
-            }
-        });
-        
-        function increaseProgress() {
-            if (progress < 100) {
-                progress += 1;
-                progressBar.style.width = progress + "%";
-            }
-            if (progress >= 100) {
-                let message = task === "brushing" ? "Der Hund ist sauber!" :
-                              task === "washing" ? "Der Hund ist frisch gewaschen!" :
-                              task === "feeding" ? "Der Hund ist satt!" :
-                              task === "playing" ? "Der Hund hatte Spaß!" :
-                              task === "healing" ? "Der Hund ist gesund!" : "Der Hund schläft friedlich!";
-                alert(message);
-                task = "";
-                resetTools();
-            }
+  <div id="hund-container">
+    <!-- Hund-Bild (verwende hier die von dir angegebene URL) -->
+    <img id="hund" src="https://www.bing.com/ck/a?!&&p=4d8915add10fda9db67579ecc461ee0b315d4a7535008ddb8d350395c94cf26cJmltdHM9MTczODQ1NDQwMA&ptn=3&ver=2&hsh=4&fclid=3bbf10f1-436d-697a-3cbb-1af8421f685a&u=a1L2ltYWdlcy9zZWFyY2g_cT1kMytodW5kK3plaWNoZW50cmljayZpZD0zQTczOEY5ODM5QzQ1MTk2NzVCQTRFQzhFQkZENTJFMURCQjlDNDFBJkZPUk09SVFGUkJB&ntb=1" alt="Hund">
+  </div>
+
+  <div id="menu">
+    <!-- Hier kann man weitere Buttons für andere Animationen hinzufügen -->
+    <button onclick="starteAnimation('putzen')">Putzen</button>
+  </div>
+
+  <!-- Fortschrittsbalken (wird beim Putzen angezeigt) -->
+  <div id="progressContainer">
+    <div id="progressBar"></div>
+  </div>
+
+  <script>
+    function starteAnimation(aktion) {
+      if (aktion === 'putzen') {
+        // Zeige den Fortschrittsbalken
+        document.getElementById("progressContainer").style.display = "block";
+        animiereFortschritt();
+      }
+      // Hier können weitere Aktionen und Animationen ergänzt werden
+    }
+
+    function animiereFortschritt() {
+      const progressBar = document.getElementById("progressBar");
+      let fortschritt = 0;
+      progressBar.style.width = fortschritt + '%';
+
+      const interval = setInterval(() => {
+        if (fortschritt >= 100) {
+          clearInterval(interval);
+        } else {
+          fortschritt++;
+          progressBar.style.width = fortschritt + '%';
         }
-    </script>
+      }, 20); // Die Zeitangabe (in Millisekunden) bestimmt die Geschwindigkeit der Animation
+    }
+  </script>
+
 </body>
 </html>
 
